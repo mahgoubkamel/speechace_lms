@@ -172,12 +172,15 @@ def start_test():
     user = get_user_by_id(user_id)
     speechace_user_id, name, email = user[4], user[1], user[2]
     oembed_url = os.environ.get('SPEECHACE_OEMBED_URL')
+
+    course_url = os.environ.get('SPEECHACE_COURSE_URL', 'https://speak.speechace.co/placement/api/course/9176/')
     key = os.environ.get('SPEECHACE_KEY')
     if not oembed_url or not key:
         return 'SpeechAce configuration missing', 500
     params = {
         'key': key,
         'app_user_id': speechace_user_id,
+                'url': course_url,
         'app_user_email': email,
         'app_user_fullname': name,
             'app_score_submission_url': quote(request.url_root.rstrip('/') + url_for('submit_scores'), safe='/')

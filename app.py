@@ -170,8 +170,12 @@ def start_test():
     if not user_id:
         return redirect(url_for('login'))
     user = get_user_by_id(user_id)
-    speechace_user_id, name, email = user[4], user[1], user[2]
-    oembed_url = os.environ.get('SPEECHACE_OEMBED_URL')
+    #speechace_user_id, name, email = user[4], user[1], user[2]
+        if not user:
+        session.pop('user_id', None)
+        return redirect(url_for('login'))
+    speechace_user_id, name, email = user[4], user[1], user[2]    
+oembed_url = os.environ.get('SPEECHACE_OEMBED_URL')
 
     course_url = os.environ.get('SPEECHACE_COURSE_URL', 'https://speak.speechace.co/placement/api/course/9176/')
     key = os.environ.get('SPEECHACE_KEY')

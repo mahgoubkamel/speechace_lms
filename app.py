@@ -27,9 +27,10 @@ def init_db():
     conn.close()
 
 
-@app.before_first_request
-def setup():
-    init_db()
+#@# app.before_first_request
+#d# ef setup():
+ #    init_db()
+init_db()
 
 
 def get_user_by_id(user_id):

@@ -6,6 +6,7 @@ from datetime import datetime
 from flask import Flask, request, redirect, url_for, session, render_template_string
 from werkzeug.security import generate_password_hash, check_password_hash
 import requests
+from urllib.parse import quote
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'change-me')
@@ -179,7 +180,7 @@ def start_test():
         'app_user_id': speechace_user_id,
         'app_user_email': email,
         'app_user_fullname': name,
-        'app_score_submission_url': request.url_root.rstrip('/') + url_for('submit_scores')
+            'app_score_submission_url': quote(request.url_root.rstrip('/') + url_for('submit_scores'), safe='/')
     }
     try:
         res = requests.get(oembed_url, params=params)
